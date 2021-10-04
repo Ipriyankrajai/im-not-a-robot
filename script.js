@@ -38,24 +38,32 @@ const verify=document.getElementById("verify");
 verify.onclick=()=>{
     if(selected[0]===selected[1]){
         para.innerText="You are a human. Congratulations!";
+        verify.style.display="none";
     }
     else{
         para.innerText="We can't verify you as a human. You selected the non-identical tiles.";
+        verify.style.display="none";
     }
 }
 
-const reset=document.getElementById("reset");
-reset.onclick=()=>{
-    reset.style.display="none";
+const undo=document.getElementById("undo");
+undo.onclick=()=>{
     selected=[];
     verify.style.display="none";
+    // reset.style.display="none";
+    undo.style.display="none";
+    para.innerText="";
     images.forEach((img)=>{
         img.classList.remove("selected");
     });
 };
+const reset=document.getElementById("reset");
+reset.onclick=()=>{
+  location.reload();
+};
 verify.style.display="none";
-reset.style.display="none";
-
+// reset.style.display="none";
+undo.style.display="none";
 
 images.forEach(img=>{
     // img.addEventListerner("click",()=>{
@@ -67,7 +75,9 @@ images.forEach(img=>{
             }
             img.classList.add("selected");
             selected.push(img.classList[0]);
-            reset.style.display="block";
+            // reset.style.display="block";
+            undo.style.display="block";
+
             if(selected.length==2){
                 verify.style.display="block";
             }
